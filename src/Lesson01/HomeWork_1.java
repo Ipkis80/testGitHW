@@ -1,4 +1,6 @@
-public class HW1 {
+package Lesson01;
+
+public class HomeWork_1 {
     public static void main(String[] args) {
         printThreeWords();
         printThreeWords();
@@ -32,7 +34,7 @@ public class HW1 {
         if ((valueA + valueB) >= 0) {
             System.out.println("Сумма положительная");
         } else
-            {
+        {
             System.out.println("Сумма отрицательная");
         }
     }
