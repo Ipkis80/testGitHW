@@ -67,14 +67,14 @@ public class HomeWork_2 {
 
     public static void CheckSign(int valueA) { //метод должен напечатать в консоль, положительное ли число передали или отрицательное.
         if (Sign(valueA)) {
-            System.out.println("Число " + valueA + " положительное");
-        } else {
             System.out.println("Число " + valueA + " отрицательное");
+        } else {
+            System.out.println("Число " + valueA + " положительное");
         }
     }
 
     public static boolean Sign(int valueA) { //Метод должен вернуть true, если число отрицательное, и вернуть false если положительное.
-        return (valueA >= 0);
+        return (valueA < 0);
     }
 
     public static void printStringN(String text, int Numbers) {
