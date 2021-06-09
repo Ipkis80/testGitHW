@@ -177,9 +177,9 @@ public class HomeWork_3 {
          При каком n в какую сторону сдвиг можете выбирать сами.
          **/
 
-//        int[] a8 = {1, 2, 3, 4, 5, 6};
-        int[] a8 = {1, 5, 4 ,2 ,3 ,8};
-        int n = -2; //Сдвиг на n элементов
+        int[] a8 = {1, 2, 3, 4, 5, 6};
+//        int[] a8 = {1, 5, 4 ,2 ,3 ,8};
+        int n = -44; //Сдвиг на n элементов
 
         printArray(a8); //Печатаем оригинальный массив
 //        shiftRightArray(a8);//Сдвигаем массив на 1 позицию вправо
@@ -252,10 +252,10 @@ public class HomeWork_3 {
     public static void shiftArray (int[] array, int n){ //Метод сдвигает элементы массива на n позиций
         int rem = n % array.length; //Вычислим рельное n сдвига, если n превышает длину массива
         rem = (rem < 0) ? -rem : rem;//
-        if ((n > 0) || (rem < (-1 * n))) { // Проверяем куда быстрее двигать, влево или вправо
+        if (n > 0) {
             for (int i = 0; i < rem; i++) shiftRightArray(array); //Сдвинем на n позиций вправо
         } else {
-            for (int i = 0; i < (-1 * n); i++) shiftLeftArray(array); //Сдвинем на n позиций влево
+            for (int i = 0; i < rem; i++) shiftLeftArray(array); //Сдвинем на n позиций влево
         }
 
 
