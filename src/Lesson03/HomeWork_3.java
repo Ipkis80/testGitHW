@@ -258,7 +258,7 @@ public class HomeWork_3 {
                 System.out.println("Двигали вправо " + rem + " раз");
             } else {
                 for (int i = 0; i < Math.abs(rem); i++) shiftLeftArray(array); //Сдвинем на n позиций влево
-                System.out.println("Двигали влево " + rem + " раз");
+                System.out.println("Двигали влево " + Math.abs(rem) + " раз");
             }
     }
 
