@@ -177,18 +177,19 @@ public class HomeWork_3 {
          При каком n в какую сторону сдвиг можете выбирать сами.
          **/
 
-        int[] a8 = {1, 2, 3, 4, 5, 6};
+        int[] a8 = {1, 2, 3, 4, 5, 6, 7, 8};
 //        int[] a8 = {1, 5, 4 ,2 ,3 ,8};
-        int n = -44; //Сдвиг на n элементов
+
+        int n = -9; //Определим на сколько N элементов будем сдвигать
 
         printArray(a8); //Печатаем оригинальный массив
+        System.out.println("n = " + n); // Напечатаем число N
 //        shiftRightArray(a8);//Сдвигаем массив на 1 позицию вправо
 //        shiftLeftArray(a8);//Сдвигаем массив на 1 позицию влево
 
         shiftArray(a8, n); //Сдвигаем массив на n позиций
 
         printArray(a8);//Печатаем преобразованный массив
-        //System.out.println(); //Перенос строки
         System.out.println("********************************");
         System.out.println();
         //-----------------Конец Задания №8------------------------
@@ -249,16 +250,19 @@ public class HomeWork_3 {
             }
             array[0] = tmp; //Помещаем последний элемент в 1й массива
         }
-    public static void shiftArray (int[] array, int n){ //Метод сдвигает элементы массива на n позиций
+    public static void shiftArray (int[] array, int n) { //Метод сдвигает элементы массива на n позиций
         int rem = n % array.length; //Вычислим рельное n сдвига, если n превышает длину массива
-        rem = (rem < 0) ? -rem : rem;//
-        if (n > 0) {
-            for (int i = 0; i < rem; i++) shiftRightArray(array); //Сдвинем на n позиций вправо
-        } else {
-            for (int i = 0; i < rem; i++) shiftLeftArray(array); //Сдвинем на n позиций влево
-        }
-
-
+        rem = (Math.abs(rem) < array.length/2) ? rem : (array.length - Math.abs(rem)); //Найдем минимальное значение сдвига
+            if (rem > 0) {
+                for (int i = 0; i < rem; i++) shiftRightArray(array); //Сдвинем на n позиций вправо
+                System.out.println("Двигали вправо " + rem + " раз");
+            } else {
+                for (int i = 0; i < Math.abs(rem); i++) shiftLeftArray(array); //Сдвинем на n позиций влево
+                System.out.println("Двигали влево " + rem + " раз");
+            }
     }
+
+
+
 }
 
