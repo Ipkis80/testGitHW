@@ -16,6 +16,7 @@ public class HomeWork_4 {
     public static final char dotX = 'X';
     public static final char dotO = 'O';
     public static final char empty = '_';
+    public static final int optionPC = 3; //Как играет компьютер?: 1-ввод вручную, 2-рандом, 3-ИИ
 
     public static Scanner pencil = new Scanner(System.in);
     public static Random random = new Random();
@@ -54,18 +55,60 @@ public class HomeWork_4 {
         map[y][x] = dotX;
     }
 
-    public static void pcTurn(){
-        int x;
-        int y;
+    public static void pcTurn(int option){ //1-ввод вручную, 2-рандом, 3-ИИ
+        int x = 0;
+        int y = 0;
+        int[] xy;
         do {
-            System.out.println("Ход PC. Введите координаты хода через пробел или клавишу 'Enter' : ");
-            x = pencil.nextInt() - 1;
-            y = pencil.nextInt() - 1;
+            switch (option){
+                case 1: //1-ввод вручную
+                    System.out.println("Ход PC. Введите координаты хода через пробел или клавишу 'Enter' : ");
+                    x = pencil.nextInt() - 1;
+                    y = pencil.nextInt() - 1;
+                    break;
+                case 2: //2-рандом
+                    x = random.nextInt(SIZE);
+                    y = random.nextInt(SIZE);
+                    break;
+                case 3:
+                    xy = bestTurnPC();
+                    x = xy[0];
+                    y = xy[1];
+                    break;
+                default:
+            }
         } while (!validXY(x,y) || !isEmpty(x,y));
 
         map[y][x] = dotO;
-
+        System.out.println("Компьютер сходил: [" + (x+1) + ":" + (y+1) + "]");
     }
+
+    public static int[]  bestTurnPC(){
+        int[] xy = {0, 0};
+        boolean[][] mapPossibleTurn = new boolean[SIZE][SIZE]; //поле ячеек, куда возможно ходить
+        for (int i = 0; i <mapPossibleTurn.length ; i++) {
+            for (int j = 0; j <mapPossibleTurn[i].length ; j++) {
+                if (isEmpty(i,j)) mapPossibleTurn[i][j] = true;
+                    else mapPossibleTurn[i][j] = false;
+            }
+        }
+
+
+        for (int i = 0; i < mapPossibleTurn.length; i++) {
+            for (int j = 0; j < mapPossibleTurn[i].length; j++) {
+                if (mapPossibleTurn[i][j]) {
+                    xy[0] = random.nextInt(SIZE);
+                    xy[1] = random.nextInt(SIZE);
+
+                }
+            }
+
+        }
+
+
+        return xy;
+    }
+
     public static boolean win(char dots){
         for (int i = 0; i < SIZE; i++) {
              if (isRowDots(i, dots, dotsToWin) ||  isColumnDots(i, dots, dotsToWin)) return true;
@@ -102,22 +145,44 @@ public class HomeWork_4 {
         return n_max >= amount;
     }
     public static boolean isDiagonalsDots (char dots, int amount){ //Есть ли amount подряд и более  dots в диагоналях
-        int n1 = 0; //n-количество  dots в ряду
-        int n2 = 0; //n-количество  dots в ряду
-        int n_max =0;
-        for (int i = 0; i < SIZE-1; i++) {
-            if (map[i+1][i] == dots) { //Посчитаем, сколько dots в диагонали [1:0]-[4:3]
-                n1 += 1;
-            } else {
-                n1 = 0;
+        int n1 = 0; //n-количество  dots подряд в ряду выше главной диагонали
+        int n2 = 0; //n-количество  dots подряд в ряду ниже главной диагонали
+        int n_max = 0;
+
+        for (int n = 0; n <SIZE-amount; n++) { // Цикл по кол-ву диагоналей выше и ниже от главной
+            for (int i = 0; i < SIZE - 1 - n; i++) {
+                if (map[i + 1 + n][i] == dots) { //Посчитаем, сколько dots в диагонали [1:0]-[4:3]
+                    n1 += 1;
+                } else {
+                    n1 = 0; //обнулим n, если встретим в ряду отличный от dots символ
+                }
+                if (map[i][i + 1 + n] == dots) { //Посчитаем, сколько dots в диагонали [0:1]-[3:4]
+                    n2 += 1;
+                } else {
+                    n2 = 0; //обнулим n, если встретим в ряду отличный от dots символ
+                }
+                n_max = (n1 > n_max) ? n1 : n_max;
+                n_max = (n2 > n_max) ? n2 : n_max;
             }
-            if (map[i][i+1] == dots) { //Посчитаем, сколько dots в диагонали [0:1]-[3:4]
-                n2 += 1;
-            } else {
-                n2 = 0;
+            if (n_max >= amount) return true;
+
+            n1 = 0;
+            n2 = 0;
+            for (int i = 0; i < SIZE - 1 - n; i++) {
+                if (map[i][SIZE - 2 - i - n] == dots) { //Посчитаем, сколько dots в диагонали [1:4]-[4:1]
+                    n1 += 1;
+                } else {
+                    n1 = 0; //обнулим n, если встретим в ряду отличный от dots символ
+                }
+                if (map[i+1+n][SIZE - 1 - i] == dots) { //Посчитаем, сколько dots в диагонали [0:1]-[3:4]
+                    n2 += 1;
+                } else {
+                    n2 = 0; //обнулим n, если встретим в ряду отличный от dots символ
+                }
+                n_max = (n1 > n_max) ? n1 : n_max;
+                n_max = (n2 > n_max) ? n2 : n_max;
             }
-            n_max = (n1 > n_max) ? n1 : n_max;
-            n_max = (n2 > n_max) ? n2 : n_max;
+            if (n_max >= amount) return true;
         }
         n1 = 0;
         n2 = 0;
@@ -127,7 +192,7 @@ public class HomeWork_4 {
             } else {
                 n1 = 0;
             }
-            if (map[SIZE-i-1][i] == dots) {
+            if (map[SIZE - i - 1][i] == dots) {
                 n2 += 1;
             } else {
                 n2 = 0;
@@ -135,8 +200,8 @@ public class HomeWork_4 {
             n_max = (n1 > n_max) ? n1 : n_max;
             n_max = (n2 > n_max) ? n2 : n_max;
         }
-
-        return n_max >= amount;
+        if (n_max >= amount) return true;
+        else return false;
     }
 
     public static boolean fullMap() {
@@ -173,7 +238,8 @@ public class HomeWork_4 {
                 break;
             }
 
-            pcTurn(); //Передаем ход компьютеру
+            //Передаем ход компьютеру
+            pcTurn(optionPC);    //1-ввод вручную, 2-рандом, 3-ИИ
             printMap();
 
             if (win(dotO)) {
@@ -181,7 +247,7 @@ public class HomeWork_4 {
                 break;
             }
             if (fullMap()) {
-                System.out.println("Поле заполнено, ходов больше нет");
+                System.out.println("Ничья! Поле заполнено, ходов больше нет");
                 break;
             }
 
