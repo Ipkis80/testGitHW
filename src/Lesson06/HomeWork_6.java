@@ -33,7 +33,7 @@ public class HomeWork_6 {
                 new Cat("Барсик", "male", 2 ),
                 new Dog("Люси", "female", 3),
                 new Cat("Маруся", "female"),
-                new Dog(), //какая-то собака
+                new Dog("Марика", 600, 200),
                 new Animal() //какое-то животное
         };
 
@@ -47,35 +47,47 @@ public class HomeWork_6 {
         System.out.println("Число собак равно: " + Dog.getAnimalCount());
 
 
-        allAnimalsSwim(animals, 100);//Все поплыли
+        allAnimalsSwim(animals, 200);//Все поплыли
         System.out.println();
         allAnimalsRun(animals, 600);
 
     } //Конец main
 
     public static void allAnimalsSwim(Animal[] animals, int distance){
-        System.out.println("Заплыв на " + distance + " метров.");
-        for (int i = 0; i < animals.length; i++) { //Все поплыли
-            if (animals[i] instanceof Cat){
-                ((Cat)animals[i]).swim(distance);
-            } else if (animals[i] instanceof Dog){
-                ((Dog)animals[i]).swim(distance);
-            } else {
-                animals[i].swim(distance);
+        if (checkDistance(distance)) {
+            System.out.println("Заплыв на " + distance + " метров.");
+            for (int i = 0; i < animals.length; i++) { //Все поплыли
+                if (animals[i] instanceof Cat) {
+                    ((Cat) animals[i]).swim(distance);
+                } else if (animals[i] instanceof Dog) {
+                    ((Dog) animals[i]).swim(distance);
+                } else {
+                    animals[i].swim(distance);
+                }
             }
+        } else {
+            System.out.println("Заплып сорван! С дистанцией что-то не так");
         }
     }
-    public static void allAnimalsRun(Animal[] animals, int distance){
-        System.out.println("Забег на " + distance + " метров.");
-        for (int i = 0; i < animals.length; i++) { //Все побежали
-            if (animals[i] instanceof Cat){
-                ((Cat)animals[i]).run(distance);
-            } else if (animals[i] instanceof Dog){
-                ((Dog)animals[i]).run(distance);
-            } else {
-                animals[i].run(distance);
+    public static void allAnimalsRun(Animal[] animals, int distance) {
+        if (checkDistance(distance)) {
+            System.out.println("Забег на " + distance + " метров.");
+            for (int i = 0; i < animals.length; i++) { //Все побежали
+                if (animals[i] instanceof Cat) {
+                    ((Cat) animals[i]).run(distance);
+                } else if (animals[i] instanceof Dog) {
+                    ((Dog) animals[i]).run(distance);
+                } else {
+                    animals[i].run(distance);
+                }
             }
+        } else {
+            System.out.println("Забег сорван! С дистанцией что-то не так");
         }
+    }
+    public static boolean checkDistance(int distance) {
+        if (distance > 0) return true;
+            else return false;
     }
 }
 
