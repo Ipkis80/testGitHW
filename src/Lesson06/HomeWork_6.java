@@ -23,7 +23,7 @@ public class HomeWork_6 {
 
         Animal RatEmil = new Animal("Крыса","Эмиль","male", 2);
         Animal HamsterRino = new Animal("Хомячок","Рино","male",1);
-        Animal Pig = new Animal("Пятачок");
+        Animal Pig = new Animal("Пятачок", 50,150);
 
         Animal animals[] = {
                 RatEmil,
@@ -86,8 +86,7 @@ public class HomeWork_6 {
         }
     }
     public static boolean checkDistance(int distance) {
-        if (distance > 0) return true;
-            else return false;
+        return (distance > 0) ? true : false;
     }
 }
 

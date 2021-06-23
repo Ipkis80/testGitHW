@@ -11,34 +11,24 @@ public class Dog extends Animal {
 
     public Dog() {
         super();
-        this.name = dogName;
-        this.maxRunDistance = dogMaxRunDistance;
-        this.maxSwimDistance = dogMaxSwimDistance;
+        setSkillsToDefault(dogName, dogMaxRunDistance, dogMaxSwimDistance);
         dogsCount += 1;
     }
 
     public Dog(String nickname, int maxRunDistance, int maxSwimDistance) {
-        super(nickname);
+        super(nickname, maxRunDistance, maxSwimDistance);
         this.name = dogName;
-        this.maxRunDistance = maxRunDistance;
-        this.maxSwimDistance = maxSwimDistance;
 
         dogsCount += 1;
     }
     public Dog(String nickname, String sex, int age){
         super(nickname, sex, age);
-        this.name = dogName;
-        this.maxRunDistance = dogMaxRunDistance;
-        this.maxSwimDistance = dogMaxSwimDistance;
-
+        setSkillsToDefault(dogName, dogMaxRunDistance, dogMaxSwimDistance);
         dogsCount += 1;
     }
     public Dog(String nickname, String sex){
         super(nickname, sex);
-        this.name = dogName;
-        this.maxRunDistance = dogMaxRunDistance;
-        this.maxSwimDistance = dogMaxSwimDistance;
-
+        setSkillsToDefault(dogName, dogMaxRunDistance, dogMaxSwimDistance);
         dogsCount += 1;
     }
 

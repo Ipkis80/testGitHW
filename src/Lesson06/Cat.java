@@ -12,32 +12,22 @@ public class Cat extends Animal {
 
     public Cat(String nickname) {
         super(nickname);
-        this.name = catName;
-        this.maxRunDistance = catMaxRunDistance;
-        this.maxSwimDistance = catMaxSwimDistance;
+        setSkillsToDefault(catName, catMaxRunDistance, catMaxSwimDistance);
         catsCount += 1;
     }
     public Cat(String nickname, int maxRunDistance, int maxSwimDistance) {
-        super(nickname);
+        super(nickname, maxRunDistance, maxSwimDistance);
         this.name = catName;
-        this.maxRunDistance = maxRunDistance;
-        this.maxSwimDistance = maxSwimDistance;
         catsCount += 1;
     }
     public Cat(String nickname, String sex, int age){
         super(nickname, sex, age);
-        this.name = catName;
-        this.maxRunDistance = catMaxRunDistance;
-        this.maxSwimDistance = catMaxSwimDistance;
-
+        setSkillsToDefault(catName, catMaxRunDistance, catMaxSwimDistance);
         catsCount += 1;
     }
     public Cat(String nickname, String sex){
         super(nickname, sex);
-        this.name = catName;
-        this.maxRunDistance = catMaxRunDistance;
-        this.maxSwimDistance = catMaxSwimDistance;
-
+        setSkillsToDefault(catName, catMaxRunDistance, catMaxSwimDistance);
         catsCount += 1;
     }
 
