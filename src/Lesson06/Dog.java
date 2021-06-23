@@ -43,27 +43,6 @@ public class Dog extends Animal {
     }
 
 //    @Override
-//    public void run(int distance) { //Бег
-//        if (distance > 0 && distance <= this.maxRunDistance)   {
-//            System.out.println(name + " " + this.nickname + " пробежал[а] " + distance + " метров");
-//        } else if (distance > this.maxRunDistance) {
-//            System.out.println(name + " " + this.nickname + " пробежал[а] " + maxRunDistance + " метров" + " и дальше " +
-//                    "бежать не может");
-//        } else System.out.println(name + " " + this.nickname + " говорит, что с дистанцией что-то не так");
-//
-//    }
-
-
-
-//    @Override
-//    public void swim(int distance) { //Плавание
-//        if (distance > 0 && distance <= this.maxSwimDistance)   {
-//            System.out.println(name + " " + this.nickname + " проплыл[а] " + distance + " метров");
-//        } else if (distance > this.maxSwimDistance) {
-//            System.out.println(name + " " + nickname + " проплыл[а] " + maxSwimDistance + " метров" + ", больше не может");
-//        } else System.out.println(name + " " + this.nickname + " говорит, что с дистанцией что-то не так");
-//    }
-//    @Override
     public static int getAnimalCount() {return Dog.dogsCount;}
 
 }
