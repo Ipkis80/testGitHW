@@ -1,5 +1,4 @@
 package Lesson06;
-import models.Animal;
 
 public class Cat extends Animal {
 

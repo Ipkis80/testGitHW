@@ -1,7 +1,5 @@
 package Lesson06;
 
-import models.Animal;
-
 /**
  * Created by Kirill Ivushkin
  * Date: 11.06.2021
